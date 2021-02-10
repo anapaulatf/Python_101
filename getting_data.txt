@@ -1,0 +1,16 @@
+PANDAS - GETTING DATA
+
+
+Data Frame  - 2 dimensões
+
+
+delimiter - vírgula, por exemplo
+
+
+import pandas as pd
+tax_data = pd.read_csv('archive.csv')
+
+ou, especificando o delimiter:
+
+tax_data = pd.read_csv("archive.tsv", sep= "\t")
+
