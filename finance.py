@@ -102,5 +102,13 @@ sample_no_replace
 
 ## Sampling from a normal distribution
 Fstsample = pd.DataFrame(np.random.normal(10,5,size=30))
+print('sample mean is ', Fstsample[0].mean())
+print('sample SD is ', Fstsample[0].std(ddof=1))
 
+
+
+aapl = pd.read_csv("data/apple.csv", index_col=0) 
+aapl.loc['2012-08-01':'2013-08-01', 'Close'].plot()
+
+plt.gcf().autofmt_xdate()
 
