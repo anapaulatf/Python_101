@@ -112,3 +112,4 @@ aapl.loc['2012-08-01':'2013-08-01', 'Close'].plot()
 
 plt.gcf().autofmt_xdate()
 
+! ls
