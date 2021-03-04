@@ -115,20 +115,36 @@ for link in soup.find_all('a'):
 #######################################
 
 # API - Application Programming Interface
-# Apresenta protocolos e rotinas para interagir com applications de softwares
+# Apresenta protocolos e rotinas para que dois programas possam se comunicar e interagir entre si
 
 # JSON - JavaScript Object Notation
 # Comunicação software para browser em tempo real 
 
-# Carregar JSONs no Python
+# Open Movie Data Base API
 import json
 import requests
-url = 'http://www.omdbapi.com/?apikey=3cf7a0a&'
-r = requests.get(url)
 
-with open('snakes.json', 'r') as json_file:
-    json_data = json.load(json_file)
+url = 'http://www.omdbapi.com/?i=tt3896198&apikey=3cf7a0a' #importa o request. o apikey é o MEU
+r = requests.get(url) #envia o request para a url (seu API query) e recebe a resposta 
+json_data = r.json() #built-in json decoder. retorna um dicionário.
 
-for key, value in json_data.items():
+for key, value in json_data.items(): 
     print(key + ':', value)
+
+# este API KEY foi fornecido pelo datacamp. Depois, utiliza o argumento t para selecionar o título "the social network"
+url = 'http://www.omdbapi.com/?apikey=72bc447a&t=the+social+network'
+r = requests.get(url)
+print(r.text)
+json_data = r.json() #decodifica o arquivo em JSON em um dicionário
+for key, value in json_data.items(): #printa cada par key-value existente em json_data 
+    print(key + ':', value)
+
+# Wikipedia API
+url = "https://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=pizza"
+r = requests.get(url) #pega o request, envia e recebe a resposta 
+json_data = r.json() #decodifica os dados em JSON para um dicionário
+pizza_extract = json_data['query']['pages']['24768']['extract']
+print(pizza_extract)
+
+# Twitter API
 
