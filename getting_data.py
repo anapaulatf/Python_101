@@ -46,3 +46,89 @@ df3 = pd.read_sql_query("SELECT * FROM customers", engine)
 df4 = pd.read_sql_query("SELECT Title, Name FROM albums INNER JOIN artists on albums.ArtistID = artists.ArtistId", engine)
 print(df4.head())
 
+
+###############################################
+#-------------INTERMEDIATE COURSE-------------#
+#---------GETTING DATA FROM THE WEB-----------#
+###############################################
+import matplotlib.pyplot as plt
+import pandas as pd
+from urllib.request import urlretrieve
+
+# URL é Universal Resource Locator
+url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_1606/datasets/winequality-red.csv"
+urlretrieve(url, "data/winequality-red.csv") #salva localmente o arquivo 
+df = pd.read_csv("data/winequality-red.csv", sep=';') #ler o arquivo no formato de DataFrame 
+print(df.head())
+
+# Não é necessário salvar o arquivo localmente. Basta mandar busca-lo para poder ler
+url = "https://s3.amazonaws.com/assets.datacamp.com/production/course_1606/datasets/winequality-red.csv"
+df = pd.read_csv(url, sep=';')
+
+pd.DataFrame.hist(df.iloc[:, 0:1])
+plt.xlabel('fixed acidity (g(tartaric acid)/dm$^3$)')
+plt.ylabel('count')
+plt.show()
+
+
+### HTTP request 
+# HTTP significa HyperText Transfer Protocol (Application Protocol)
+# Ao ir em um website, você envia um HTTP request: GET request
+# urlretrieve() realiza um GET request 
+# HTML - HyperText Markup Language
+
+# GET request utilizando urllib
+from urllib.request import urlopen, Request
+url = "http://www.wikipedia.org/"
+request = Request(url) #envia o request
+response = urlopen(request) #retorna uma resposta (response) associado a um método read
+html = response.read()
+response.close()
+
+# Será utilizado o 'requests' para realizar o request GET
+import requests
+url = "http://www.datacamp.com/teach/documentation"
+r = requests.get(url) #envia o request e captura a resposta em uma única função
+text = r.text #retorna o html como uma string 
+print(text)
+
+
+# BeautifulSoup
+# Parse (analisa) and extract strutured data from HTML
+from bs4 import BeautifulSoup
+import requests
+url = 'http://www.crummy.com/software/BeautifulSoup/'
+r = requests.get(url)
+html_doc = r.text
+soup = BeautifulSoup(html_doc)
+print(soup.prettify())
+print(soup.title)
+print(soup.get_text())
+
+#extrair todas as url de todos os hiperlinks 
+#encontre todas as tags 'a', que são aquelas que definem hyperlinks
+for link in soup.find_all('a'):
+    print(link.get('href'))
+
+#######################################
+#------INTRODUÇÃO A APIs E JSONs------#
+#######################################
+
+# API - Application Programming Interface
+# Apresenta protocolos e rotinas para interagir com applications de softwares
+
+# JSON - JavaScript Object Notation
+# Comunicação software para browser em tempo real 
+
+# Carregar JSONs no Python
+import json
+import requests
+url = 'http://www.omdbapi.com/?apikey=3cf7a0a&'
+r = requests.get(url)
+
+with open('snakes.json', 'r') as json_file:
+    json_data = json.load(json_file)
+
+for key, value in json_data.items():
+    print(key + ':', value)
+
