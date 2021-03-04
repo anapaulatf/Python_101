@@ -92,3 +92,4 @@ ax.set_ylabel("CO2")
 plt.show()
 
 
+print(3+3)
