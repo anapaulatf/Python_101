@@ -1,7 +1,20 @@
 import pandas as pd
+import json
+import requests
 
-file = 'data/DespesaSenado.csv'
 
-data = pd.read_csv(file, encoding='latin-1', sep=';', skiprows=2)
+url = 'https://dadosabertos.camara.leg.br/api/v2/deputados?ordenarPor=siglaPartido'
+r = requests.get(url)
 
-print(data.head())
+json_data = r.json()
+
+json_data.keys()
+json_extract = json_data['dados']
+type(json_extract)
+
+data = pd.DataFrame(json_extract)
+data.head()
+print(data.keys())
+
+
+
