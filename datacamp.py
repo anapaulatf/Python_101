@@ -62,3 +62,5 @@ europe['italy'] = data
 
 # Print europe
 print(europe)
+
+print(2 + 2)
