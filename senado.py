@@ -15,6 +15,3 @@ type(json_extract)
 data = pd.DataFrame(json_extract)
 data.head()
 print(data.keys())
-
-
-
