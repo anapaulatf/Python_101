@@ -1,8 +1,7 @@
 
 # gapminder DATA
-import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from gapminder import gapminder
 gapminder.head()
